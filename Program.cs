@@ -25,9 +25,12 @@
 
             player.TakeDamage(20);
             player.TakeDamage(40);
+
+            player.Heal(30);
+
             player.TakeDamage(40);
 
-            // 이벤트 연결 해지 구독 해지
+            // 이벤트 연결 해지 구독 해지 (메모리 누수를 막기위해 필수 __ 잊지말것)
             player.OnHpChanged -= DisplayHp;
         }
 
@@ -38,7 +41,7 @@
 
     }
 
-    class Player
+    class Player : IHealable
     {
         public string Name { get; } // 읽기 전용 속성 프로퍼티
         private int _hp;            //내부 필드
@@ -49,9 +52,17 @@
         public event PlayerDieHandler OnPlayerDie;
 
         // 이벤트를 정의 및 선언
-        // Action
+        // Action 델리게이트
         // - .NET 에서 제공하는 내장 델리게이트
+        // Action<T> : 매개변수는 T형식, 반환형은 void
+        // Action<T1,T2,T3...T16> : 16개 까지 가능
         public event Action<int> OnHpChanged;
+
+        //Func 델리게이트 (반환형이 있는 경우)
+        // Func<T1, T2, TResult> : 매개변수는 T1, T2, 형식 반환형은 TResult
+
+        // (현재 HP, 회복량 ) => 회복 후 HP
+        public event Func<int, int, int> OnHealing = (currHp, healAmount) => currHp + healAmount;
 
 
         public Player(string name, int hp)
@@ -76,5 +87,17 @@
                 OnPlayerDie?.Invoke();
             }
         }
+
+        public void Heal(int amount)
+        {
+            _hp = OnHealing(_hp, amount);
+            Console.WriteLine($"HP 회복됨 : {_hp} [회복량 : {amount}]");
+        }
+    }
+
+    // 힐러 인터페이스
+    interface IHealable
+    {
+        void Heal(int amount);
     }
 }
