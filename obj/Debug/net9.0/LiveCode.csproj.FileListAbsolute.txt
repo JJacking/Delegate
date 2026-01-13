@@ -1,0 +1,15 @@
+C:\temp\LiveCode\bin\Debug\net9.0\LiveCode.exe
+C:\temp\LiveCode\bin\Debug\net9.0\LiveCode.deps.json
+C:\temp\LiveCode\bin\Debug\net9.0\LiveCode.runtimeconfig.json
+C:\temp\LiveCode\bin\Debug\net9.0\LiveCode.dll
+C:\temp\LiveCode\bin\Debug\net9.0\LiveCode.pdb
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.GeneratedMSBuildEditorConfig.editorconfig
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.AssemblyInfoInputs.cache
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.AssemblyInfo.cs
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.csproj.CoreCompileInputs.cache
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.dll
+C:\temp\LiveCode\obj\Debug\net9.0\refint\LiveCode.dll
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.pdb
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.genruntimeconfig.cache
+C:\temp\LiveCode\obj\Debug\net9.0\ref\LiveCode.dll
+C:\temp\LiveCode\obj\Debug\net9.0\LiveCode.sourcelink.json
