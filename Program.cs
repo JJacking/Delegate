@@ -1,43 +1,48 @@
 ﻿namespace LiveCode
 {
-    // 델리게이트
-    // - 메서드 참조를 지정할 수 있는 형식
 
     public class Program
     {
-        //선언
-        private delegate void LoggerDelegate(string msg);
 
         static void Main(string[] args)
         {
-            // 2. 델리게이트 할당
-            //LoggerDelegate log = Logger;
-            LoggerDelegate? log = null;
+            Player player = new Player("Jack",100);
 
-            //3. 델리게이트 호출
-            //log("델리게이트 호출 성공 1");
+            // 플레이어 사망 이벤트 발생
+            //player.OnPlayerDie?.Invoke();
 
-            //4. 델리게이트 체인 기법
-            log += Logger;
-            log += LoggerTime;
-            
-            log?.Invoke("델리게이트 호출 성공 : 체인 ");
 
-            Console.WriteLine("정상 종료");
-
-            // 5. 델리게이트 제거
-            log -= Logger;
-            log?.Invoke("델리게이트 호출 성공 : 체인 제거 후 ");
         }
 
-        static void Logger(string msg)
+    }
+
+    class Player
+    {
+        public string Name { get; } // 읽기 전용 속성 프로퍼티
+        private int _hp;            //내부 필드
+
+        public delegate void PlayerDieHandler();
+        public event PlayerDieHandler OnPlayerDie;
+
+        public Player(string name, int hp)
         {
-            Console.WriteLine(msg);
+            Name = name;
+            _hp = hp;
+            OnPlayerDie += Die;
         }
 
-        static void LoggerTime(string msg)
+        public void Die()
         {
-            Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {msg}");
+            Console.WriteLine("플레이어가 사망했습니다.");
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _hp -= damage;
+            if( _hp < 0 )
+            {
+                OnPlayerDie?.Invoke();
+            }
         }
     }
 }
